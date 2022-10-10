@@ -10,6 +10,7 @@ class BaseUnit(ABC):
     """
     Базовый класс юнита
     """
+
     def __init__(self, name: str, unit_class: UnitClass):
         """
         При инициализации класса Unit используем свойства класса UnitClass
@@ -24,11 +25,11 @@ class BaseUnit(ABC):
 
     @property
     def health_points(self):
-        return round(self.hp, 1) # TODO возвращаем аттрибут hp в красивом виде
+        return round(self.hp, 1)  # TODO возвращаем аттрибут hp в красивом виде
 
     @property
     def stamina_points(self):
-        return  round(self.stamina, 1) # TODO возвращаем аттрибут hp в красивом виде
+        return round(self.stamina, 1)  # TODO возвращаем аттрибут hp в красивом виде
 
     def equip_weapon(self, weapon: Weapon):
         # TODO присваиваем нашему герою новое оружие
@@ -56,7 +57,7 @@ class BaseUnit(ABC):
         target_stamina = target.armor.stamina_per_turn * target.unit_class.stamina
 
         if target.stamina > target.armor.stamina_per_turn * target.unit_class.stamina:
-            damage -= target.armor * target.unit_class.armor
+            damage -= target.armor.defence * target.unit_class.armor
             target.stamina -= target_stamina
 
         damage = round(damage, 1)
@@ -140,6 +141,3 @@ class EnemyUnit(BaseUnit):
         # TODO результат функции должен возвращать результат функции skill.use или же следующие строки:
 
         return f"{self.name} используя {self.weapon.name} наносит удар, но Ваш(а) {target.armor.name} его останавливает."
-
-
-
